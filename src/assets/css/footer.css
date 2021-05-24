@@ -1,0 +1,22 @@
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  background-color: #02b795;
+  padding: 15px;
+}
+
+.boton-footer {
+  color: #444;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 2.3em;
+  margin: 10px;
+}
+@media (min-width: 768px) {
+  .footer {
+    margin: 15px;
+    border-radius: 20px;
+  }
+}

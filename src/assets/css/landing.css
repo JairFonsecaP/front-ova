@@ -1,0 +1,31 @@
+.landing {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #02b795;
+  padding: 5vh;
+  font-size: 1.5em;
+}
+a {
+  text-decoration: none;
+}
+@media (min-width: 768px) {
+  .landing {
+    flex-direction: row;
+    margin: 20px;
+  }
+  .copy {
+    border-radius: 20px;
+    padding: 25px;
+    margin: 10px;
+  }
+  .ova {
+    width: 500px;
+  }
+}
