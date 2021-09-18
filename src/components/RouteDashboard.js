@@ -11,10 +11,14 @@ import NewPassword from "./NewPassword";
 import NuevoCurso from "./NuevoCurso";
 import EditarPerfil from "./EditarPerfil";
 import EliminarPerfil from "./EliminarPerfil";
+import Resultados from "./Resultados";
 
 const RouteDashboard = (props) => {
   return (
     <Switch>
+      <Route path={"/dashboard/resultados"} exact>
+        <Resultados user={props.user} token={props.token} />
+      </Route>
       <Route path={"/dashboard/eliminar-perfil"} exact>
         <EliminarPerfil
           setToken={props.setToken}

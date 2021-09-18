@@ -13,10 +13,8 @@ const Juego = () => {
   const [vidas, setVidas] = useState(5);
   const [progresoTotal, setProgresoTotal] = useState(0);
   const [progreso, setProgreso] = useState(0);
-  const [usuario, setUsuario] = useState({});
   const [paso, setPaso] = useState(0);
   const [score, setScore] = useState(0);
-  const [lose, setLose] = useState(false);
   const [respuesta, setRespuesta] = useState(undefined);
 
   const init = async () => {
@@ -25,18 +23,20 @@ const Juego = () => {
       setPreguntas(response.data.preguntas);
       setNumeroPreguntas(response.data.largo);
       setProgresoTotal(100 / response.data.largo);
-      setUsuario(JSON.parse(sessionStorage.getItem("estudiante")));
       setProgreso(100 / response.data.largo);
     } catch (e) {
       console.log(e);
     }
   };
 
-  const next = () => {
+  const next = async () => {
     if (respuesta === preguntas[paso].respuestaCorrecta) {
       setScore(score + 1);
     } else {
       setVidas(vidas - 1);
+      if (vidas === 1) {
+        history.push("/ova/juego/juego-perdido");
+      }
     }
     setPaso(paso + 1 > numeroPreguntas ? numeroPreguntas - 1 : paso + 1);
     setProgreso(
@@ -47,16 +47,29 @@ const Juego = () => {
   const onChange = (e) => {
     setRespuesta(e.target.value);
   };
-  const finalizar = () => {
+  const finalizar = async () => {
     if (respuesta === preguntas[paso].respuestaCorrecta) {
       setScore(score + 1);
     } else {
       setVidas(vidas - 1);
+      if (vidas === 0) {
+        history.push("/ova/juego/juego-perdido");
+      }
     }
     setProgreso(
       progreso + progresoTotal > 100 ? 100 : progreso + progresoTotal
     );
-    sessionStorage.setItem("score", score);
+    const { email, nombre, curso } = JSON.parse(
+      sessionStorage.getItem("estudiante")
+    );
+    await axios.post(`${api}resultados/add`, {
+      nombre,
+      email,
+      curso,
+      vidas,
+      puntaje: score,
+    });
+    //sessionStorage.removeItem("estudiante");
     history.push("/ova/juego/resultado");
   };
   useEffect(() => {

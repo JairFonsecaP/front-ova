@@ -4,10 +4,7 @@ import axios from "axios";
 import api from "../assets/js/api";
 import { DeleteFilled } from "@ant-design/icons";
 
-import { useHistory } from "react-router-dom";
-
 const Cursos = (props) => {
-  const history = useHistory();
   const Toggle = (curso, token) => {
     return (
       <Switch

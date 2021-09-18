@@ -7,7 +7,6 @@ import Footer from "./Footer";
 import Nosotros from "./Nosotros";
 import NotFound from "./NotFound";
 import Producto from "./Producto";
-import Login from "./Login";
 import "../assets/css/home.css";
 
 function Home() {

@@ -8,6 +8,7 @@ import {
   ApartmentOutlined,
   QuestionOutlined,
   UsergroupAddOutlined,
+  TableOutlined,
 } from "@ant-design/icons";
 import RouteDashboard from "./RouteDashboard";
 
@@ -29,8 +30,8 @@ const Dashboard = (props) => {
         collapsed={collapsed}
         onCollapse={() => onCollapse(collapsed)}
       >
-        <div className="logo" />
         <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+          {/* <div className="logo" /> */}
           <Menu.Item
             key="1"
             icon={<ContactsOutlined />}
@@ -38,7 +39,13 @@ const Dashboard = (props) => {
           >
             Interesados
           </Menu.Item>
-
+          <Menu.Item
+            key="101"
+            icon={<TableOutlined />}
+            onClick={() => history.push("/dashboard/resultados")}
+          >
+            Resultados
+          </Menu.Item>
           <SubMenu key="sub1" icon={<QuestionOutlined />} title="Preguntas">
             <Menu.Item
               key="3"
@@ -129,7 +136,12 @@ const Dashboard = (props) => {
         </Menu>
       </Sider>
       <Layout className="site-layout">
-        <Header className="site-layout-background" style={{ padding: 0 }} />
+        <Header
+          className="site-layout-background"
+          style={{ padding: 0, color: "#fff", textAlign: "center" }}
+        >
+          Bienvenido {props.user.nombre}
+        </Header>
         <Content style={{ margin: "0 16px" }}>
           <RouteDashboard
             editar={editar}

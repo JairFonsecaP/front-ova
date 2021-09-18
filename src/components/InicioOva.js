@@ -32,7 +32,6 @@ const InicioOva = () => {
 
   useEffect(() => {
     if (sessionStorage.getItem("estudiante")) {
-      console.log(history);
       history.replace("/ova/uno");
     } else {
       init();
@@ -138,7 +137,7 @@ const InicioOva = () => {
           >
             <Select style={{ width: 120 }}>
               {cursos.map((curso, index) => (
-                <Option value={curso.id} key={index}>
+                <Option value={curso.curso} key={index}>
                   {curso.curso}
                 </Option>
               ))}

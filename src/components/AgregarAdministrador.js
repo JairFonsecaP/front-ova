@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Card, Alert } from "antd";
-import { PropertySafetyTwoTone, SaveFilled } from "@ant-design/icons";
+import { SaveFilled } from "@ant-design/icons";
 import axios from "axios";
 import api from "../assets/js/api";
 import { useHistory } from "react-router-dom";

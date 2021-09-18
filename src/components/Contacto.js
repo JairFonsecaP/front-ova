@@ -47,7 +47,17 @@ const Contacto = (props) => {
         response.data.map((one, index) => {
           const fecha = new Date(one.createdAt);
           one.key = one.createdAt + index;
-          one.hora = `${fecha.getHours()}:${fecha.getMinutes()}:${fecha.getSeconds()}`;
+          one.hora = `${
+            fecha.getHours() <= 9 ? `0${fecha.getHours()}` : fecha.getHours()
+          }:${
+            fecha.getMinutes() <= 9
+              ? `0${fecha.getMinutes()}`
+              : fecha.getMinutes()
+          }:${
+            fecha.getSeconds() <= 9
+              ? `0${fecha.getSeconds()}`
+              : fecha.getSeconds()
+          }`;
           one.createdAt = `${
             fecha.getDate() <= 9 ? `0${fecha.getDate()}` : fecha.getDate()
           }/${

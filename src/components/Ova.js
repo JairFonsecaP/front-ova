@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import InicioOva from "./InicioOva";
 import Juego from "./Juego";
+import JuegoPerdido from "./JuegoPerdido";
 import NotFound from "./NotFound";
 import PaginaUno from "./PaginaUno";
 import Resultado from "./Resultado";
@@ -14,6 +15,11 @@ const Ova = () => {
         <>
           <Route path="/ova/uno" exact component={PaginaUno} />
           <Route path="/ova/juego" exact component={Juego} />
+          <Route
+            path="/ova/juego/juego-perdido"
+            exact
+            component={JuegoPerdido}
+          />
           <Route path="/ova/juego/resultado" exact component={Resultado} />
         </>
       ) : (

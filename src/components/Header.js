@@ -1,10 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import LogoTM from "../assets/images/LogoTM.png";
-import { Button } from "antd";
 import "../assets/css/header.css";
 
-function Header(props) {
+function Header() {
   return (
     <header className="header" id="header">
       <Link to="/">

@@ -25,10 +25,10 @@ const Administradores = (props) => {
       },
     ]);
   };
-
   useEffect(() => {
     init();
   }, []);
+
   return (
     <div>
       <Table
