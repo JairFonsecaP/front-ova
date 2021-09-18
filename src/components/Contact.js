@@ -1,45 +1,126 @@
-import React from "react";
-import {
-  Avatar,
-  Button,
-  Grid,
-  Paper,
-  TextField,
-  Typography,
-} from "@material-ui/core";
-import MailOutlineRoundedIcon from "@material-ui/icons/MailOutlineRounded";
-
+import React, { useState } from "react";
+import { Card, Form, Input, Button, Alert, Spin } from "antd";
+import api from "../assets/js/api";
+import axios from "axios";
 import "../assets/css/formulario.css";
 
+const { TextArea } = Input;
+
 const Contact = () => {
+  const [form] = Form.useForm();
+  const [message, setMessage] = useState(undefined);
+  const [loading, setLoading] = useState(false);
+  const onFinish = async (values) => {
+    setLoading(true);
+    const { data } = await axios.post(`${api}contacto/registro`, values);
+    setMessage(data);
+
+    if (data.type === "success") {
+      form.resetFields();
+    }
+    setLoading(false);
+    setTimeout(() => {
+      setMessage(undefined);
+    }, 5000);
+  };
+
+  const onFinishFailed = (errorInfo) => {};
   return (
-    <Grid>
-      <Paper elevation={20} className="paper">
-        <Grid align="center">
-          <Avatar className="avatar">
-            <MailOutlineRoundedIcon />
-          </Avatar>
-          <h2 className="titulo-form">Contactanos</h2>
-          <Typography variant="caption">
-            Llena este formulario y nos pondremos en contacto contigo a la
-            brevedd
-          </Typography>
-        </Grid>
-        <form>
-          <TextField fullWidth label="Name" placeholder="Ingresa tu nombre" />
-          <TextField
-            fullWidth
+    <div className="site-card-border-less-wrapper">
+      <Card
+        title="Contactanos"
+        bordered={true}
+        style={{ width: 600, margin: "auto" }}
+        extra={loading && <Spin size="large" />}
+      >
+        <Form
+          form={form}
+          name="basic"
+          labelCol={{
+            span: 8,
+          }}
+          wrapperCol={{
+            span: 16,
+          }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
+        >
+          <Form.Item
+            label="Nombre"
+            name="nombre"
+            rules={[
+              {
+                required: true,
+                message: "Campo requerido",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
             label="Email"
-            placeholder="Ingresa un e-mail valido"
-          />
-          <TextField fullWidth label="Telefono" placeholder="Te llamaremos" />
-          <TextField fullWidth label="Comentario" />
-          <Button type="submit" variant="contained" color="primary">
-            Enviar
-          </Button>
-        </form>
-      </Paper>
-    </Grid>
+            name="email"
+            rules={[
+              {
+                required: true,
+                message: "Campo requerido",
+              },
+              {
+                type: "email",
+                message: "Ingrese un email valido",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Telefono"
+            name="telefono"
+            rules={[
+              {
+                required: true,
+                message: "Campo requerido",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Comentario"
+            name="comentario"
+            rules={[
+              {
+                required: true,
+                message: "Campo requerido",
+              },
+            ]}
+          >
+            <TextArea rows={4} />
+          </Form.Item>
+          {message && (
+            <Alert
+              message={message.title}
+              description={message.message}
+              type={message.type}
+              showIcon
+              closable
+              style={{ marginBottom: "15px" }}
+            />
+          )}
+          <Form.Item
+            wrapperCol={{
+              offset: 8,
+              span: 16,
+            }}
+          >
+            <Button loading={loading} type="primary" htmlType="submit">
+              Enviar
+            </Button>
+          </Form.Item>
+        </Form>
+      </Card>
+    </div>
   );
 };
 

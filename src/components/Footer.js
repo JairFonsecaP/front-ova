@@ -29,6 +29,9 @@ function Footer() {
       <Link to="/contacto">
         <FontAwesomeIcon icon={faAt} className="boton-footer" />
       </Link>
+      <Link to="/" className="boton-footer">
+        Inicio
+      </Link>
       <Link to="/nosotros" className="boton-footer">
         ¿Quienes somos?
       </Link>

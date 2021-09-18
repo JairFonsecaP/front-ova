@@ -1,0 +1,22 @@
+.contenedor {
+  display: flex;
+  justify-content: center;
+}
+.botonera {
+  display: grid;
+  grid-template-columns: 16.6% 16.6% 16.6% 16.6% 16.6% 16.6%;
+  width: 270px;
+  position: relative;
+  top: 50px;
+  left: 520px;
+  z-index: 1000;
+}
+.player {
+  width: 800px;
+  height: 600px;
+  border: 1px solid black;
+}
+.progreso {
+  margin: auto;
+  width: 800px;
+}

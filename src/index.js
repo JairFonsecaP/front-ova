@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./assets/theme/themeConfig";
+import "antd/dist/antd.css";
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>

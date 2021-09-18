@@ -9,3 +9,10 @@
 .avatar {
   background-color: #ff1780;
 }
+.alerta {
+  width: 50vw;
+}
+.AlertaContenedor {
+  display: flex;
+  justify-content: flex-end;
+}
