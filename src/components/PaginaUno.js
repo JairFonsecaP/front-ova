@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import animacion from "../assets/images/giphy.gif";
 import { Button, Tooltip } from "antd";
 import { Progress } from "antd";
 import {
@@ -13,7 +12,6 @@ import {
   FastBackwardOutlined,
 } from "@ant-design/icons";
 import ReactPlayer from "react-player";
-import video_ova from "../assets/videos/video.mp4";
 import "../assets/css/ova.css";
 
 const PaginaUno = () => {
@@ -27,27 +25,7 @@ const PaginaUno = () => {
   const pause = () => {
     setPaused(!paused);
   };
-  // const pantalla = () => {
-  //   var tam = [0, 0];
-  //   if (typeof window.innerWidth != "undefined") {
-  //     tam = [window.innerWidth, window.innerHeight];
-  //   } else if (
-  //     typeof document.documentElement != "undefined" &&
-  //     typeof document.documentElement.clientWidth != "undefined" &&
-  //     document.documentElement.clientWidth != 0
-  //   ) {
-  //     tam = [
-  //       document.documentElement.clientWidth,
-  //       document.documentElement.clientHeight,
-  //     ];
-  //   } else {
-  //     tam = [
-  //       document.getElementsByTagName("body")[0].clientWidth,
-  //       document.getElementsByTagName("body")[0].clientHeight,
-  //     ];
-  //   }
-  //   console.log(tam);
-  // };
+
   const reiniciar = () => {
     const container = document.getElementById("vid");
     let video = container.querySelector("video");
@@ -55,14 +33,12 @@ const PaginaUno = () => {
   };
 
   useEffect(() => {
-    // pantalla();
     init();
     setTimeout(() => {
       pause();
     }, 1000);
   }, []);
   return (
-    // {window.screen}
     <div style={{ height: "100vh", backgroundColor: "#26447f" }}>
       <h1 style={{ color: "#fff", textAlign: "center", padding: "10px" }}>
         Hola {estudiante.nombre}
@@ -73,7 +49,6 @@ const PaginaUno = () => {
           showInfo={false}
           status="active"
           strokeColor="#ff1780"
-          // strokeColor={{ "0%": "#ff1780", "100%": "#000" }}
           size="x-large"
         />
       </div>
@@ -144,17 +119,12 @@ const PaginaUno = () => {
           <div className="player">
             <ReactPlayer
               id="vid"
-              url={video_ova}
+              url={"https://www.youtube.com/watch?v=9_pIaI93YGY"}
               width="800px"
               height="600px"
               playing={paused}
               muted={muted}
             />
-            {/* <img
-              src={animacion}
-              style={{ height: "600px", width: "800px" }}
-              alt="Animacion gif"
-            /> */}
           </div>
         </div>
       </div>
