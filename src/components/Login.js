@@ -7,8 +7,10 @@ import { useHistory } from "react-router-dom";
 const Login = (props) => {
   const history = useHistory();
   const [message, setMessage] = useState(undefined);
+  const [loading, setLoading] = useState(false);
 
   const onFinish = async (values) => {
+    setLoading(true);
     const { data } = await axios.post(`${api}profesor/login`, values);
 
     if (data.token) {
@@ -21,6 +23,7 @@ const Login = (props) => {
         setMessage(undefined);
       }, 5000);
     }
+    setLoading(false);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -32,7 +35,8 @@ const Login = (props) => {
       <Card
         title="Iniciar sesión"
         bordered={false}
-        style={{ width: 800, margin: "auto" }}
+        bordered
+        style={{ maxWidth: 800, margin: "100px auto" }}
       >
         <Form
           name="basic"
@@ -91,7 +95,7 @@ const Login = (props) => {
                 style={{ width: "300px", marginBottom: "10px" }}
               />
             )}
-            <Button type="primary" htmlType="submit">
+            <Button loading={loading} type="primary" htmlType="submit">
               Iniciar
             </Button>
           </Form.Item>

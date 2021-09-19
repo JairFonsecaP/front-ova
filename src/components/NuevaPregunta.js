@@ -9,7 +9,7 @@ const { Option } = Select;
 
 const NuevaPregunta = (props) => {
   const history = useHistory();
-  const [opciones, setOpciones] = useState(["A", "B", "C", "D"]);
+  const [opciones, setOpciones] = useState([]);
 
   const onFinish = async (values) => {
     if (!props.editar) {
@@ -35,6 +35,7 @@ const NuevaPregunta = (props) => {
 
   useEffect(() => {
     document.querySelector("form").reset();
+    setOpciones(["A", "B", "C", "D"]);
   }, [props.editar]);
 
   return (

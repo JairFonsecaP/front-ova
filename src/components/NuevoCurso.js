@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Card, Form, Input, Button } from "antd";
-import { SendOutlined, EditFilled } from "@ant-design/icons";
+import { SendOutlined } from "@ant-design/icons";
 import axios from "axios";
 import api from "../assets/js/api";
 import { useHistory } from "react-router-dom";

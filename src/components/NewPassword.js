@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Card, Form, Input, Alert, Button } from "antd";
 import { useHistory } from "react-router-dom";
 import axios from "axios";

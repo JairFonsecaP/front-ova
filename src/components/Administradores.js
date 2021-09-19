@@ -6,12 +6,10 @@ import api from "../assets/js/api";
 const Administradores = (props) => {
   const [data, setData] = useState([]);
   const [columnas, setColumnas] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const init = async () => {
-    const response = await axios(`${api}profesor/list`, {
-      headers: { token: props.token },
-    });
-    setData(response.data);
+    setLoading(true);
     setColumnas([
       {
         title: "Nombre",
@@ -24,6 +22,11 @@ const Administradores = (props) => {
         key: "email",
       },
     ]);
+    const response = await axios(`${api}profesor/list`, {
+      headers: { token: props.token },
+    });
+    setData(response.data);
+    setLoading(false);
   };
   useEffect(() => {
     init();
@@ -32,6 +35,7 @@ const Administradores = (props) => {
   return (
     <div>
       <Table
+        loading={loading}
         dataSource={data}
         columns={columnas}
         style={{ margin: "30px auto" }}

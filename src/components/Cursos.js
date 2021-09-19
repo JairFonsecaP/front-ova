@@ -5,33 +5,6 @@ import api from "../assets/js/api";
 import { DeleteFilled } from "@ant-design/icons";
 
 const Cursos = (props) => {
-  const Toggle = (curso, token) => {
-    return (
-      <Switch
-        key={curso.id}
-        defaultChecked={curso.estado}
-        size="small"
-        onChange={async () => {
-          const response = await axios.patch(
-            `${api}cursos/activate-deactivate/${curso.id}`,
-            { estado: !curso.estado },
-            { headers: { token: token } }
-          );
-          if (response.data.error) {
-            setMessage(response.data.error);
-          } else {
-            if (!response.data[0] > 0) {
-              init();
-              setMessage(
-                `No se pudo activar el curso ${curso.curso} por favor intente de nuevo.`
-              );
-              setTimeout(() => setMessage(undefined), 5000);
-            }
-          }
-        }}
-      />
-    );
-  };
   const columns = [
     {
       title: "Curso",
@@ -42,7 +15,41 @@ const Cursos = (props) => {
       title: "Acitvo/Inactivo",
       width: 150,
       key: "id",
-      render: (curso) => Toggle(curso, props.token),
+      render: (curso) => (
+        <Switch
+          key={curso.id}
+          defaultChecked={curso.estado}
+          size="small"
+          onChange={async () => {
+            setLoading(true);
+            try {
+              const response = await axios.patch(
+                `${api}cursos/activate-deactivate/${curso.id}`,
+                { estado: !curso.estado },
+                { headers: { token: props.token } }
+              );
+
+              if (response.data.error) {
+                setMessage(response.data.error);
+              } else {
+                if (!response.data[0] > 0) {
+                  init();
+                  setMessage(
+                    `No se pudo activar el curso ${curso.curso} por favor intente de nuevo.`
+                  );
+                  setTimeout(() => setMessage(undefined), 5000);
+                }
+              }
+            } catch (e) {
+              setMessage(
+                `No se pudo activar el curso ${curso.curso} por favor intente de nuevo.`
+              );
+              setTimeout(() => setMessage(undefined), 5000);
+            }
+            setLoading(false);
+          }}
+        />
+      ),
     },
     {
       title: "Eliminar",
@@ -55,6 +62,7 @@ const Cursos = (props) => {
           okText="Eliminar"
           onConfirm={async () => {
             try {
+              setLoading(true);
               await axios.delete(`${api}cursos/eliminar/${pregunta.id}`, {
                 headers: { token: props.token },
               });
@@ -62,6 +70,7 @@ const Cursos = (props) => {
             } catch (e) {
               console.log(e);
             }
+            setLoading(false);
           }}
         >
           <DeleteFilled style={{ fontSize: 20 }} />
@@ -72,12 +81,15 @@ const Cursos = (props) => {
 
   const [data, setData] = useState([]);
   const [message, setMessage] = useState(undefined);
+  const [loading, setLoading] = useState(false);
 
   const init = async () => {
+    setLoading(true);
     const response = await axios.get(`${api}cursos/list`, {
       headers: { token: props.token },
     });
     setData(response.data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -93,7 +105,7 @@ const Cursos = (props) => {
           message={message}
         />
       )}
-      <Table dataSource={data} columns={columns} />
+      <Table loading={loading} dataSource={data} columns={columns} />
     </div>
   );
 };

@@ -38,7 +38,9 @@ const columns = [
 const Contacto = (props) => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(undefined);
+  const [loading, setLoading] = useState(false);
   const init = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${api}contacto/list`, {
         headers: { token: props.token },
@@ -78,6 +80,7 @@ const Contacto = (props) => {
     } catch (e) {
       console.log(e);
     }
+    setLoading(false);
   };
   useEffect(() => {
     init();
@@ -89,6 +92,7 @@ const Contacto = (props) => {
           <Alert type="error" message="Error" showIcon description={error} />
         )}
         <Table
+          loading={loading}
           columns={columns}
           dataSource={data}
           pagination={{ pageSize: 20 }}

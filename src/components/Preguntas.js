@@ -62,11 +62,13 @@ const Preguntas = (props) => {
           defaultChecked={pregunta.estado}
           size="small"
           onChange={async () => {
+            setLoading(true);
             await axios.patch(
               `${api}juego/activate-deactivate/${pregunta.id}`,
               { estado: !pregunta.estado },
               { headers: { token: props.token } }
             );
+            setLoading(false);
           }}
         />
       ),
@@ -81,6 +83,7 @@ const Preguntas = (props) => {
           cancelText="Cancelar"
           okText="Eliminar"
           onConfirm={async () => {
+            setLoading(true);
             try {
               await axios.delete(`${api}juego/eliminar/${pregunta.id}`, {
                 headers: { token: props.token },
@@ -89,6 +92,7 @@ const Preguntas = (props) => {
             } catch (e) {
               console.log(e);
             }
+            setLoading(false);
           }}
         >
           <DeleteFilled style={{ fontSize: 20 }} />
@@ -98,8 +102,10 @@ const Preguntas = (props) => {
   ];
 
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const init = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(`${api}juego/list`, {
         headers: { token: props.token },
@@ -109,13 +115,19 @@ const Preguntas = (props) => {
     } catch (e) {
       console.log(e);
     }
+    setLoading(false);
   };
 
   useEffect(() => {
     init();
   }, []);
   return (
-    <Table columns={columns} dataSource={data} pagination={{ pageSize: 20 }} />
+    <Table
+      loading={loading}
+      columns={columns}
+      dataSource={data}
+      pagination={{ pageSize: 20 }}
+    />
   );
 };
 

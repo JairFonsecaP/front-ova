@@ -1,6 +1,7 @@
 {
   "name": "frontend",
   "version": "0.1.0",
+  "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.6.4",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",

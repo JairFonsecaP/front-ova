@@ -34,11 +34,14 @@ const Resultados = (props) => {
     },
   ];
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const init = async () => {
+    setLoading(true);
     const response = await axios.get(`${api}resultados/list`, {
       headers: { token: props.token },
     });
     setData(response.data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -47,6 +50,7 @@ const Resultados = (props) => {
   return (
     <div>
       <Table
+        loading={loading}
         style={{ margin: "20px auto" }}
         columns={columns}
         dataSource={data}
