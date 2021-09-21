@@ -1,14 +1,15 @@
 .contenedor {
-  display: flex;
-  justify-content: center;
+  position: relative;
+  padding: 0;
+  margin: auto;
 }
 .botonera {
   display: grid;
   grid-template-columns: 16.6% 16.6% 16.6% 16.6% 16.6% 16.6%;
   width: 270px;
   position: relative;
-  top: 50px;
-  left: 520px;
+  top: 85px;
+  left: 530px;
   z-index: 1000;
 }
 .player {
@@ -17,6 +18,8 @@
   border: 1px solid black;
 }
 .progreso {
-  margin: auto;
   width: 800px;
+  margin: 0;
+  padding: 0;
+  margin: auto;
 }

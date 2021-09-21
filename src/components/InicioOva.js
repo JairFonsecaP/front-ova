@@ -13,7 +13,7 @@ const InicioOva = () => {
 
   const onFinish = (values) => {
     sessionStorage.setItem("estudiante", JSON.stringify(values));
-    history.push("/ova/uno");
+    history.push("/ova/presentacion/uno");
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -32,7 +32,7 @@ const InicioOva = () => {
 
   useEffect(() => {
     if (sessionStorage.getItem("estudiante")) {
-      history.replace("/ova/uno");
+      history.replace("/ova/presentacion/uno");
     } else {
       init();
     }

@@ -4,7 +4,7 @@ import InicioOva from "./InicioOva";
 import Juego from "./Juego";
 import JuegoPerdido from "./JuegoPerdido";
 import NotFound from "./NotFound";
-import PaginaUno from "./PaginaUno";
+import PaginaOva from "./PaginaOva";
 import Resultado from "./Resultado";
 
 const Ova = () => {
@@ -13,7 +13,7 @@ const Ova = () => {
       <Route path="/ova" component={InicioOva} exact />
       {sessionStorage.getItem("estudiante") ? (
         <>
-          <Route path="/ova/uno" exact component={PaginaUno} />
+          <Route path="/ova/presentacion" component={PaginaOva} />
           <Route path="/ova/juego" exact component={Juego} />
           <Route
             path="/ova/juego/juego-perdido"

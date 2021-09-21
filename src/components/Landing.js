@@ -1,12 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import caricatura from "../assets/pdf/Caricatura.pdf";
 import "../assets/css/landing.css";
 import { Button } from "@material-ui/core";
 import { GetApp } from "@material-ui/icons";
 import foto from "../assets/images/LogoTM.png";
+import api from "../assets/js/api";
+import axios from "axios";
 
 function Landing() {
+  const download = () => {
+    axios({
+      url: `${api}recursos/enviar-pdf/caricatura.pdf`,
+      method: "GET",
+      responseType: "blob",
+    }).then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "caricatura.pdf");
+      document.body.appendChild(link);
+      link.click();
+    });
+  };
   return (
     <div className="landing">
       <Link to="/ova">
@@ -31,11 +46,18 @@ function Landing() {
             incluye.
           </p>
         </div>
-        <a href={caricatura} download="Para pintar.pdf">
-          <Button variant="contained" color="primary" startIcon={<GetApp />}>
-            Descargar caricatura para pintar
-          </Button>
-        </a>
+
+        <Button
+          size="large"
+          htmlFor="archivo-input"
+          onClick={() => download()}
+          variant="contained"
+          color="primary"
+          startIcon={<GetApp />}
+          download="Para pintar.pdf"
+        >
+          Descargar caricatura para pintar
+        </Button>
       </div>
     </div>
   );
