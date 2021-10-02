@@ -32,23 +32,36 @@ const Login = (props) => {
 
   return (
     <div className="site-card-border-less-wrapper">
-      <Card
-        title="Iniciar sesión"
-        bordered={false}
-        bordered
-        style={{ maxWidth: 800, margin: "100px auto" }}
+      <Form
+        name="basic"
+        labelCol={{
+          span: 8,
+        }}
+        wrapperCol={{
+          span: 16,
+        }}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
+        autoComplete="off"
       >
-        <Form
-          name="basic"
-          labelCol={{
-            span: 8,
-          }}
-          wrapperCol={{
-            span: 16,
-          }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
+        <Card
+          title="Iniciar sesión"
+          bordered={false}
+          bordered
+          style={{ maxWidth: 800, margin: "100px auto" }}
+          actions={[
+            <Button loading={loading} type="primary" htmlType="submit">
+              Iniciar
+            </Button>,
+            <Button
+              loading={loading}
+              onClick={() => {
+                history.push("/");
+              }}
+            >
+              Atras
+            </Button>,
+          ]}
         >
           <Form.Item
             label="Email"
@@ -95,12 +108,9 @@ const Login = (props) => {
                 style={{ width: "300px", marginBottom: "10px" }}
               />
             )}
-            <Button loading={loading} type="primary" htmlType="submit">
-              Iniciar
-            </Button>
           </Form.Item>
-        </Form>
-      </Card>
+        </Card>
+      </Form>
     </div>
   );
 };

@@ -5,13 +5,14 @@
   align-items: center;
 }
 .ova {
-  width: 700px;
+  max-width: 100%;
+  margin: 10px auto;
 }
 .copy {
   display: flex;
   color: #000;
   flex-direction: column;
-  width: 700px;
+  max-width: 1290px;
   align-items: center;
   background-color: #02b795;
   padding: 5vh;
@@ -21,10 +22,9 @@ a {
   text-decoration: none;
 }
 @media (min-width: 768px) {
-  .ova {
+  /* .ova {
     max-width: 500px;
-    margin: auto;
-  }
+  } */
 
   .copy {
     border-radius: 20px;
