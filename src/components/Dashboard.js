@@ -9,6 +9,7 @@ import {
   QuestionOutlined,
   UsergroupAddOutlined,
   TableOutlined,
+  HomeFilled,
 } from "@ant-design/icons";
 import RouteDashboard from "./RouteDashboard";
 
@@ -31,7 +32,13 @@ const Dashboard = (props) => {
         onCollapse={() => onCollapse(collapsed)}
       >
         <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-          {/* <div className="logo" /> */}
+          <Menu.Item
+            key="14"
+            icon={<HomeFilled />}
+            onClick={() => history.push("/")}
+          >
+            Inicio
+          </Menu.Item>
           <Menu.Item
             key="1"
             icon={<ContactsOutlined />}

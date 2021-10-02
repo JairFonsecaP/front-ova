@@ -7,12 +7,15 @@ import Footer from "./Footer";
 import Nosotros from "./Nosotros";
 import NotFound from "./NotFound";
 import Producto from "./Producto";
-import "../assets/css/home.css";
 
-function Home() {
+function Home(props) {
   return (
-    <div className="home">
-      <Header />
+    <div>
+      <Header
+        setToken={props.setToken}
+        setUser={props.setUser}
+        user={props.user}
+      />
       <Switch>
         <Route path="/producto" component={Producto} />
         <Route path="/contacto" component={Contact} />

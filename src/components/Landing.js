@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "../assets/css/landing.css";
 import { Button } from "@material-ui/core";
 import { GetApp } from "@material-ui/icons";
-import foto from "../assets/images/LogoTM.png";
 import api from "../assets/js/api";
 import axios from "axios";
 
@@ -24,8 +23,17 @@ function Landing() {
   };
   return (
     <div className="landing">
-      <Link to="/ova">
-        <img src={foto} alt="Ova" className="ova" />
+      <Link to="/ova" className="ova">
+        <img
+          style={{
+            padding: "5px",
+            border: "solid 1px black",
+            backgroundColor: "#ff1780",
+          }}
+          src={`${api}recursos/enviar-gif/inicio_ova.gif`}
+          alt="Ova"
+          className="ova"
+        />
       </Link>
       <div className="copy">
         <div>

@@ -10,21 +10,18 @@ import {
   FastForwardOutlined,
   FastBackwardOutlined,
 } from "@ant-design/icons";
-import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
 import ReactPlayer from "react-player";
 import "../assets/css/ova.css";
 import { useHistory } from "react-router-dom";
 import api from "../assets/js/api";
 import Cargando from "./Cargando";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const PaginaUno = (props) => {
+const PaginaCuatro = (props) => {
   const history = useHistory();
   const [muted, setMuted] = useState(false);
   const [paused, setPaused] = useState(true);
   const [termino, setTermino] = useState(false);
   const [comenzo, setComenzo] = useState(false);
-  const [caticatura, setCaricatura] = useState(false);
   const pause = () => {
     setPaused(!paused);
   };
@@ -66,6 +63,7 @@ const PaginaUno = (props) => {
             title="Avanzar"
             onClick={() => {
               props.sumarProgreso();
+              history.replace("tres");
             }}
           >
             <Button
@@ -113,28 +111,12 @@ const PaginaUno = (props) => {
             />
           </Tooltip>
         </div>
-        {termino && (
-          <FontAwesomeIcon
-            icon={faPlayCircle}
-            style={{
-              fontSize: "150px",
-              position: "absolute",
-              margin: 0,
-              zIndex: 100,
-              top: 150,
-              left: 150,
-              color: "#ff1780",
-              cursor: "pointer",
-              cursor: "hand",
-            }}
-            onClick={() => console.log("aaa")}
-          />
-        )}
+
         <div className="player">
           {!comenzo && <Cargando />}
           <ReactPlayer
             id="vid"
-            url={`${api}recursos/enviar-video/ova_dos.mp4`}
+            url={`${api}recursos/enviar-video/ova_tres.mp4`}
             onPlay={() => {
               setComenzo(true);
             }}
@@ -144,13 +126,13 @@ const PaginaUno = (props) => {
             autoPlay
             muted={muted}
             onProgress={({ playedSeconds: seconds }) =>
-              seconds >= 5 && setTermino(true)
+              seconds >= 27 && setTermino(true)
             }
-            loop
+            onEnded={() => history.replace("tres")}
           />
         </div>
       </div>
     </div>
   );
 };
-export default PaginaUno;
+export default PaginaCuatro;

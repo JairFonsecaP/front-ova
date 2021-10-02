@@ -1,12 +1,17 @@
 .landing {
-  display: flex;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  justify-content: center;
   align-items: center;
-  flex-direction: column;
+}
+.ova {
+  width: 700px;
 }
 .copy {
   display: flex;
+  color: #000;
   flex-direction: column;
+  width: 700px;
   align-items: center;
   background-color: #02b795;
   padding: 5vh;
@@ -16,16 +21,14 @@ a {
   text-decoration: none;
 }
 @media (min-width: 768px) {
-  .landing {
-    flex-direction: row;
-    margin: 20px;
+  .ova {
+    max-width: 500px;
+    margin: auto;
   }
+
   .copy {
     border-radius: 20px;
     padding: 25px;
     margin: 10px;
-  }
-  .ova {
-    width: 500px;
   }
 }

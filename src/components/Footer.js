@@ -26,18 +26,6 @@ function Footer() {
       <a href="https://www.youtube.com" rel="noreferrer" target="_blank">
         <FontAwesomeIcon icon={faYoutube} className="boton-footer" />
       </a>
-      <Link to="/contacto">
-        <FontAwesomeIcon icon={faAt} className="boton-footer" />
-      </Link>
-      <Link to="/" className="boton-footer">
-        Inicio
-      </Link>
-      <Link to="/nosotros" className="boton-footer">
-        ¿Quienes somos?
-      </Link>
-      <Link to="/producto" className="boton-footer">
-        Nuestro producto
-      </Link>
     </footer>
   );
 }

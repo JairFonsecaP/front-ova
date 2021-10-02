@@ -142,21 +142,26 @@ const Juego = () => {
               ]
         }
       >
-        <h2>{preguntas[paso].pregunta}</h2>
-        <Radio.Group onChange={onChange} value={respuesta}>
-          <Radio.Button value="A" style={{ margin: "20px 50px" }}>
-            {preguntas[paso].respuestaA}
-          </Radio.Button>
-          <Radio.Button value="B" style={{ margin: "20px 50px" }}>
-            {preguntas[paso].respuestaB}
-          </Radio.Button>
-          <Radio.Button value="C" style={{ margin: "20px 50px" }}>
-            {preguntas[paso].respuestaC}
-          </Radio.Button>
-          <Radio.Button value="D" style={{ margin: "20px 50px" }}>
-            {preguntas[paso].respuestaD}
-          </Radio.Button>
-        </Radio.Group>
+        <Card
+          title={preguntas[paso].pregunta}
+          bordered
+          style={{ boxShadow: "0px 10px 10px rgba(0, 0, 0, 0.15)" }}
+        >
+          <Radio.Group onChange={onChange} value={respuesta}>
+            <Radio.Button value="A" style={{ margin: "20px 50px" }}>
+              {preguntas[paso].respuestaA}
+            </Radio.Button>
+            <Radio.Button value="B" style={{ margin: "20px 50px" }}>
+              {preguntas[paso].respuestaB}
+            </Radio.Button>
+            <Radio.Button value="C" style={{ margin: "20px 50px" }}>
+              {preguntas[paso].respuestaC}
+            </Radio.Button>
+            <Radio.Button value="D" style={{ margin: "20px 50px" }}>
+              {preguntas[paso].respuestaD}
+            </Radio.Button>
+          </Radio.Group>
+        </Card>
       </Card>
     </div>
   ) : (

@@ -4,18 +4,20 @@ import "../assets/css/ova.css";
 import { Switch, Route } from "react-router-dom";
 import PaginaUno from "./PaginaUno";
 import PaginaDos from "./PaginaDos";
+import PaginaTres from "./PaginaTres";
+import PaginaCuatro from "./PaginaCuatro";
 
 const PaginaOva = () => {
   const [estudiante, setEstudiante] = useState({});
-  const [progreso, setProgreso] = useState(10);
+  const [progreso, setProgreso] = useState(0);
   const init = () => {
     setEstudiante(JSON.parse(sessionStorage.getItem("estudiante")));
   };
   const sumarProgreso = () => {
-    setProgreso(progreso < 100 ? progreso + 10 : 100);
+    setProgreso(progreso < 100 ? progreso + 25 : 100);
   };
   const restarProgreso = () => {
-    setProgreso(progreso > 0 ? progreso - 10 : 0);
+    setProgreso(progreso > 0 ? progreso - 25 : 0);
   };
   useEffect(() => {
     init();
@@ -40,12 +42,25 @@ const PaginaOva = () => {
       <Switch>
         <Route path="/ova/presentacion/uno" exact>
           <PaginaUno
+            setProgreso={setProgreso}
             sumarProgreso={sumarProgreso}
             restarProgreso={restarProgreso}
           />
         </Route>
         <Route path="/ova/presentacion/dos" exact>
           <PaginaDos
+            sumarProgreso={sumarProgreso}
+            restarProgreso={restarProgreso}
+          />
+        </Route>
+        <Route path="/ova/presentacion/tres" exact>
+          <PaginaTres
+            sumarProgreso={sumarProgreso}
+            restarProgreso={restarProgreso}
+          />
+        </Route>
+        <Route path="/ova/presentacion/cuatro" exact>
+          <PaginaCuatro
             sumarProgreso={sumarProgreso}
             restarProgreso={restarProgreso}
           />

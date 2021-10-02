@@ -30,7 +30,7 @@ function App() {
     init();
   }, [token]);
   return (
-    <div className="App">
+    <div>
       <Switch>
         <Route path="/dashboard">
           <PrivateRouter
@@ -53,7 +53,9 @@ function App() {
           )}
         </Route>
         <Route path="/ova" component={Ova} />
-        <Route path="/" component={Home} />
+        <Route path="/">
+          <Home setToken={setToken} setUser={setUser} user={user} />
+        </Route>
       </Switch>
     </div>
   );

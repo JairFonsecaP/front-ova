@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Tooltip } from "antd";
 import {
   ReloadOutlined,
@@ -9,21 +9,19 @@ import {
   PauseOutlined,
   FastForwardOutlined,
   FastBackwardOutlined,
-  PlayCircleOutlined,
 } from "@ant-design/icons";
 import ReactPlayer from "react-player";
 import "../assets/css/ova.css";
 import { useHistory } from "react-router-dom";
-import Cargando from "./Cargando";
 import api from "../assets/js/api";
+import Cargando from "./Cargando";
 
-const PaginaUno = (props) => {
+const PaginaTres = (props) => {
   const history = useHistory();
   const [muted, setMuted] = useState(false);
   const [paused, setPaused] = useState(true);
   const [termino, setTermino] = useState(false);
   const [comenzo, setComenzo] = useState(false);
-
   const pause = () => {
     setPaused(!paused);
   };
@@ -33,9 +31,7 @@ const PaginaUno = (props) => {
     let video = container.querySelector("video");
     video.currentTime = 0;
   };
-  useEffect(() => {
-    props.setProgreso(25);
-  }, []);
+
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div className="contenedor">
@@ -50,10 +46,14 @@ const PaginaUno = (props) => {
             zIndex: 1000,
           }}
         >
-          <Tooltip title="Retroceder">
+          <Tooltip
+            title="Retroceder"
+            onClick={() => {
+              props.restarProgreso();
+              history.replace("dos");
+            }}
+          >
             <Button
-              key="paginauno"
-              disabled
               shape="circle"
               size="large"
               icon={<FastBackwardOutlined />}
@@ -63,7 +63,7 @@ const PaginaUno = (props) => {
             title="Avanzar"
             onClick={() => {
               props.sumarProgreso();
-              history.replace("dos");
+              history.replace("cuatro");
             }}
           >
             <Button
@@ -74,7 +74,7 @@ const PaginaUno = (props) => {
             />
           </Tooltip>
 
-          <Tooltip title="Inicio">
+          <Tooltip title="Inicio" onClick={() => history.replace("uno")}>
             <Button shape="circle" size="large" icon={<HomeOutlined />} />
           </Tooltip>
 
@@ -90,7 +90,6 @@ const PaginaUno = (props) => {
 
           <Tooltip
             title={paused ? "Pausar" : "Reanudar"}
-            id="pausar"
             onClick={() => {
               pause();
             }}
@@ -112,34 +111,12 @@ const PaginaUno = (props) => {
             />
           </Tooltip>
         </div>
-        {termino && (
-          <Tooltip title="Empezar">
-            <Button
-              size="large"
-              icon={<PlayCircleOutlined />}
-              type="primary"
-              style={{
-                position: "absolute",
-                margin: 0,
-                zIndex: 100,
-                top: 500,
-                left: 350,
-              }}
-              onClick={() => {
-                props.sumarProgreso();
-                return history.replace("dos");
-              }}
-            >
-              PLAY
-            </Button>
-          </Tooltip>
-        )}
 
         <div className="player">
           {!comenzo && <Cargando />}
           <ReactPlayer
             id="vid"
-            url={`${api}recursos/enviar-video/ova_uno.mp4`}
+            url={`${api}recursos/enviar-video/ova_3_2.mp4`}
             onPlay={() => {
               setComenzo(true);
             }}
@@ -149,13 +126,12 @@ const PaginaUno = (props) => {
             autoPlay
             muted={muted}
             onProgress={({ playedSeconds: seconds }) =>
-              seconds >= 12 && setTermino(true)
+              seconds >= 49 && setTermino(true)
             }
-            loop
           />
         </div>
       </div>
     </div>
   );
 };
-export default PaginaUno;
+export default PaginaTres;
